@@ -1,0 +1,104 @@
+{% extends 'blogs/base.html' %}
+{% block css %}
+    <style>
+        .tweet-card {
+            width: 400px; /* Ширина карточки */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Тень карточки */
+            border-radius: 16px; /* Закругление углов карточки */
+            overflow: hidden; /* При необходимости обрезаем содержимое, чтобы оно не выходило за границы карточки */
+            margin: 16px auto; /* Отступы от краев экрана для центрирования */
+            font-family: Arial, sans-serif; /* Шрифт текста */
+        }
+
+        .tweet-card .user-info {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            background-color: #f5f5f5;
+        }
+
+        .tweet-card .user-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            margin-right: 12px;
+            overflow: hidden;
+        }
+
+        .tweet-card .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .tweet-card .user-name {
+            border: 2px solid #1da1f2; /* Цвет рамки вокруг имени автора */
+            border-radius: 8px; /* Закругление углов рамки */
+            padding: 4px 8px; /* Внутренние отступы рамки */
+            color: #1da1f2; /* Цвет текста имени автора */
+        }
+
+        .tweet-card .tweet-content {
+            padding: 12px;
+        }
+
+        .tweet-card .tweet-text {
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .tweet-card .tweet-meta {
+            font-size: 14px;
+            color: #999;
+        }
+
+        .tweet-card .tweet-actions {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px;
+            background-color: #f5f5f5;
+        }
+
+        .tweet-card .tweet-actions button {
+            border: none;
+            background: none;
+            cursor: pointer;
+            color: #999;
+            font-size: 14px;
+        }
+
+        .tweet-card .tweet-actions button:hover {
+            color: #1da1f2;
+        }
+        .tweet-card .tweet-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    {% for post in posts %}
+            <div class="tweet-card">
+                <div class="user-info">
+                    <div class="user-name">{{ post.owner }}</div>
+                </div>
+                <div class="tweet-content">
+                    <div class="tweet-text"><h3>{{ post.topic }}</h3></div>
+                    <hr>
+                    <div class="tweet-text">{{ post.text }}</div>
+
+                    {% if post.img.url != 'img.jpg' %}
+                        <img src="{{ post.img.url }}" style="max-width: 400px;">
+                    {% endif %}
+
+                    <div class="tweet-meta">Posted on {{ post.date_added }}</div>
+                </div>
+                <div class="tweet-actions">
+                    <a type="button" class="btn" href="{% url 'blogs:post_detail' post.id %}">комментарии</a>
+                </div>
+            </div>
+        {% empty %}
+            <p>Нет постов</p>
+    {% endfor %}
+{% endblock %}

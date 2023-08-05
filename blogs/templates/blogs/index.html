@@ -1,0 +1,23 @@
+{% extends 'blogs/base.html' %}
+{% load static %}
+
+
+{% block content %}
+    <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="jumbotron">
+          <h1 class="display-4">Добро пожаловать в BLOGS!</h1>
+            <hr>
+          <p class="lead">Здесь вы найдете увлекательные статьи, захватывающие рассказы и умные обсуждения на различные темы.</p>
+          <p class="lead">Присоединяйтесь к нашему сообществу, делитесь своими мыслями и оставляйте комментарии под нашими интересными постами.</p>
+          <hr class="my-4">
+          <p>Мы рады видеть вас здесь и надеемся, что наш блог станет для вас источником вдохновения и новых знаний.</p>
+          <p class="lead">
+            <a class="btn btn-primary btn-lg" href="{% url 'blogs:posts_list' %}" role="button">Посмотреть посты</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

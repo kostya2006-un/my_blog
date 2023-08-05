@@ -1,0 +1,16 @@
+{% extends 'blogs/base.html' %}
+{% load django_bootstrap5 %}
+{% block content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h2 class="mb-4">Создать новый пост</h2>
+      <form method="post" enctype="multipart/form-data" action="{% url 'blogs:new_post' %}">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% bootstrap_button "Создать пост" button_type="submit" button_class="btn-primary mt-3" %}
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

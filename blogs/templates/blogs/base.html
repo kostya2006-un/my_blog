@@ -1,0 +1,44 @@
+{% load django_bootstrap5 %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    {% block css %}
+
+    {% endblock %}
+    {% bootstrap_css %}
+</head>
+<header class="p-3 text-bg-dark">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="{% url 'blogs:index' %}" class="nav-link px-2 text-secondary">Home</a></li>
+          {% if user.is_authenticated %}
+              <li><a href="{% url 'blogs:posts_list' %}" class="nav-link px-2 text-white">Посты</a></li>
+              <li><a href="{% url 'blogs:new_post' %}" class="nav-link px-2 text-white">Создать новый пост</a></li>
+              <li><a href="{% url 'users:profile' %}" class="nav-link px-2 text-white">Мои посты</a></li>
+          {% endif %}
+        </ul>
+        {% if user.is_authenticated %}
+            <div class="text-end">
+                <a type="button" class="btn btn-warning" href="{% url 'users:user_logout' %}">Выйти</a>
+            </div>
+         {% else %}
+            <div class="text-end">
+              <a type="button" class="btn btn-outline-light me-2" href="{% url 'users:user_login' %}">Войти</a>
+              <a type="button" class="btn btn-warning" href="{% url 'users:user_register' %}">Регистрация</a>
+            </div>
+        {% endif %}
+      </div>
+    </div>
+  </header>
+<body>
+    {% block page_header %}
+
+    {% endblock %}
+    {% block content %}
+
+    {% endblock %}
+</body>
+</html>
